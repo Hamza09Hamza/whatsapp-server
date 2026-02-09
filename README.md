@@ -1,0 +1,58 @@
+
+# IBS Chat — Quick Overview
+
+A compact summary of the IBS Chat project (frontend + server).
+
+**What it is**
+- **IBS Chat** is a WhatsApp-like realtime messaging app with private/group chat, delivery/read receipts, and audio/video calling using a Mediasoup SFU.
+
+**Key Features**
+- Real-time messaging (private and group)
+- Message delivery & read receipts
+- In-app call signaling + Mediasoup SFU for audio/video
+- Server-side automatic call recording
+- Admin approval flow for new users
+
+**Tech Stack**
+- Frontend: React Native (TypeScript)
+- Backend: Node.js + Express + Socket.IO
+- Media: Mediasoup SFU + react-native-webrtc
+- Database: PostgreSQL
+
+**Quick Start (high-level)**
+- Backend: run the server in `server/` (uses `.env` for DB and ports). Server exposes REST endpoints and Socket.IO events.
+- Frontend: open the React Native app in `ibschat/` and run via `npx react-native run-ios` or `npx react-native run-android` after installing dependencies.
+
+See the full architecture doc for details: [docs/IBS_Chat_Architecture_Documentation.md](docs/IBS_Chat_Architecture_Documentation.md)
+
+**Important Socket Events (summary)**
+- `register_user` — client registers socket to server
+- `send_private_message` / `receive_private_message` — private messaging
+- `send_group_message` / `receive_group_message` — group messaging
+- `call_user` → `incoming_call` → `answer_call` → `call_accepted` — call signaling flow
+- `message_status_update` — delivery/read status updates
+
+**Call Flow (3 phases)**
+- `calling` → server delivers `incoming_call` to callee
+- `ringing` → server can emit `call_ringing` to notify the caller when the callee's device received the incoming call
+- `connected` → after `answer_call` and mediasoup join, media flows via SFU
+
+**Database & Recording**
+- PostgreSQL stores users, rooms, messages, message_status (receipts), calls, and recordings.
+- When media producers exist in a call, the server can auto-start FFmpeg-based recording stored under `server/recordings/`.
+
+**Where to look next**
+- Server entry: `server/server.js`
+- Mediasoup: `server/mediaServer.js`
+- Frontend root: `ibschat/App.tsx`
+- Architecture doc: [docs/IBS_Chat_Architecture_Documentation.md](docs/IBS_Chat_Architecture_Documentation.md)
+
+**Notes for developers**
+- Socket auth and production hardening (HTTPS, JWT verification, CORS, rate limits) are recommended before deploying.
+- See the architecture doc for DB schema, socket event reference, and detailed media/recording behavior.
+
+**License & Credits**
+- Internal project; adapt licensing as needed.
+
+---
+Generated: February 2026 — concise project README
