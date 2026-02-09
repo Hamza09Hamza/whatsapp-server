@@ -1,10 +1,10 @@
 
-# IBS Chat — Quick Overview
+#  What's app like Chat — Quick Overview
 
-A compact summary of the IBS Chat project (frontend + server).
+A compact summary of the  Chat project (frontend + server).
 
 **What it is**
-- **IBS Chat** is a WhatsApp-like realtime messaging app with private/group chat, delivery/read receipts, and audio/video calling using a Mediasoup SFU.
+- This is a WhatsApp-like realtime messaging app with private/group chat, delivery/read receipts, and audio/video calling using a Mediasoup SFU.
 
 **Key Features**
 - Real-time messaging (private and group)
@@ -14,15 +14,12 @@ A compact summary of the IBS Chat project (frontend + server).
 - Admin approval flow for new users
 
 **Tech Stack**
-- Frontend: React Native (TypeScript)
-- Backend: Node.js + Express + Socket.IO
-- Media: Mediasoup SFU + react-native-webrtc
+- Server: Node.js + Express + Socket.IO
+- Media: Mediasoup SFU 
 - Database: PostgreSQL
 
 **Quick Start (high-level)**
-- Backend: run the server in `server/` (uses `.env` for DB and ports). Server exposes REST endpoints and Socket.IO events.
-- Frontend: open the React Native app in `ibschat/` and run via `npx react-native run-ios` or `npx react-native run-android` after installing dependencies.
-
+- run the server in `server/` (uses `.env` for DB and ports). Server exposes REST endpoints and Socket.IO events.
 
 **Important Socket Events (summary)**
 - `register_user` — client registers socket to server
@@ -46,7 +43,6 @@ A compact summary of the IBS Chat project (frontend + server).
 
 **Notes for developers**
 - Socket auth and production hardening (HTTPS, JWT verification, CORS, rate limits) are recommended before deploying.
-- See the architecture doc for DB schema, socket event reference, and detailed media/recording behavior.
 
 **License & Credits**
 - Internal project; adapt licensing as needed.
